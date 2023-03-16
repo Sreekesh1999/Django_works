@@ -15,7 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from operations import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("addition/",views.AdditionView.as_view(),name="add"),
+    path("subtraction/",views.SubtractionView.as_view(),name="sub"),
+    path("multiplication/",views.MultiplicationView.as_view(),name="mul"),
+    path("division/",views.DivisionView.as_view(),name="div"),
+    path("cube/",views.CubeView.as_view(),name="cube"),
+    path("factorial/",views.FactorialView.as_view(),name="fact"),
+    path("primenumber/",views.PrimenumberView.as_view(),name="prime"),
+    path("armstrong/",views.ArmstrongView.as_view(),name="armstrong"),
+    path("palindrome/",views.PalindromeView.as_view(),name="palindrome"),
+    path("evennumber/",views.EvennumbersView.as_view(),name="evennumber"),
+    path("health/",views.HealthyView.as_view(),name="healthy"),
+    path("",views.HomeView.as_view(),name="home"),
+    
+
 ]

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Lets check How healthy you are !!!!</h1>
+    <form action="" method="post">
+        {%csrf_token%}
+        <input type="text" name="tsize" placeholder="Enter tummy size">
+        <input type="text" name="bsize" placeholder="Enter buttock size">
+        <input type="text" name="gender" placeholder="Enter your gender">
+        <input type="submit" value="Find">
+    </form>
+    <div class="container">
+        <table class="table mt-3 shadow p-3 mb-5 bg-body-tertiary rounded">
+            <tr>
+                <th class="table-info">Women</th>
+                <th class="table-info">Health Risk</th>
+                <th class="table-info">Body shape</th>
+            </tr>
+            <tr>
+                <td class="bg-success">0.80 or below</td>
+                <td class="bg-success">Low</td>
+                <td class="bg-success">Pear</td>
+            </tr>
+            <tr>
+                <td class="bg-warning">0.81 to 0.85</td>
+                <td class="bg-warning">Medium</td>
+                <td class="bg-warning">Avocado</td>
+            </tr>
+            <tr>
+                <td class="bg-danger">0.85+</td>
+                <td class="bg-danger">High</td>
+                <td class="bg-danger">Apple</td>
+            </tr>
+        </table>
+        <table class="table shadow p-3 mb-5 bg-body-tertiary rounded">
+            <tr>
+                <th class="table-info">Men</th>
+                <th class="table-info">Health Risk</th>
+                <th class="table-info">Body shape</th>
+            </tr>
+            <tr>
+                <td class="bg-success">0.95 or below</td>
+                <td class="bg-success">Low</td>
+                <td class="bg-success">Pear</td>
+            </tr>
+            <tr>
+                <td class="bg-warning">0.96 to 1</td>
+                <td class="bg-warning">Medium</td>
+                <td class="bg-warning">Avocado</td>
+            </tr>
+            <tr>
+                <td class="bg-danger">1+</td>
+                <td class="bg-danger">High</td>
+                <td class="bg-danger">Apple</td>
+            </tr>
+        </table>
+    </div>
+    <h5>Your Result</h5>
+    <!-- Got below DTL code from chatgpt -->
+<!-- {% if context %}
+<table>
+    <tr>
+        <th>Key</th>
+        <th>Value</th>
+    </tr>
+    {% for key, value in context.items %}
+    <tr>
+        <td>{{ key }}</td>
+        <td>{{ value }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %} -->
+
+{%if Risk%}
+    {%if Risk == "High" %}
+        <div class="bg-danger text-white">
+            {{Gender}} {{Risk}} {{Shape}} {{bmi}}
+        </div>
+    {%endif%}
+{%endif%}
+{%if Risk%}
+    {%if Risk == "Medium"%}
+        <div class="bg-warning text-white">
+            {{Gender}} {{Risk}} {{Shape}} {{bmi}}
+        </div>
+    {%endif%}
+{%endif%}
+{%if Risk%}
+    {%if Risk == "Low" %}
+        <div class="bg-success text-white">
+            {{Gender}} {{Risk}} {{Shape}} {{bmi}}
+        </div>
+    {%endif%}
+{%endif%}
+
+</body>
+</html>
