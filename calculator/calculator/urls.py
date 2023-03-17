@@ -30,6 +30,11 @@ urlpatterns = [
     path("palindrome/",views.PalindromeView.as_view(),name="palindrome"),
     path("evennumber/",views.EvennumbersView.as_view(),name="evennumber"),
     path("health/",views.HealthyView.as_view(),name="healthy"),
+    path("temprature/",views.TempratureView.as_view(),name="temprature"),
+    path("exponent/",views.ExponentView.as_view(),name="exponent"),
+    path("login/",views.LoginView.as_view(),name="login"),
+    path("registration/",views.RegistrationView.as_view(),name="registration"),
+    path("geo/",views.GeoView.as_view(),name="geo"),
     path("",views.HomeView.as_view(),name="home"),
     
 

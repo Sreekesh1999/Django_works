@@ -1,6 +1,47 @@
 from django.shortcuts import render
 from django.views.generic import View
 
+from django import forms
+
+from geopy.geocoders import Nominatim
+def get_address(place):
+    loc = Nominatim(user_agent="GetLoc")
+    getLoc = loc.geocode(place)
+    return getLoc.address
+
+class GeoView(View):
+    def get(self,request,*args,**kwargs):
+        form=GeoForm()
+        return render(request,"geo.html",{"form":form})
+    
+    def post(self,request,*args,**kwargs):
+        form=GeoForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            place=form.cleaned_data.get("place")
+            address=get_address(place)
+            print(address)
+        return render(request,"geo.html",{"result":address})
+
+class OperationForm(forms.Form):
+    num1=forms.IntegerField()
+    num2=forms.IntegerField()
+
+class LoginForm(forms.Form):
+    username=forms.CharField()
+    password=forms.CharField()
+
+class RegistrationForm(forms.Form):
+    first_name=forms.CharField()
+    last_name=forms.CharField()
+    email=forms.EmailField()
+    user_name=forms.CharField()
+    password=forms.CharField()
+
+class GeoForm(forms.Form):
+    place=forms.CharField()
+    
+
 # Create your views here.
 # Localhost:8000/add
 # Get
@@ -159,7 +200,63 @@ class HealthyView(View):
                 context["Gender"]="Female"
                 context["Risk"]="High"
                 context["Shape"]="Apple"
+                return render(request,"health.html",context)
 
-        return render(request,"health.html",context)
+class TempratureView(View):
+    def get(self,request,*args,**kwargs):
+        return render(request,"temprature.html")
+    
+    def post(self,request,*args,**kwargs):
+        temp=int(request.POST.get("temprature"))
+        constant=9/5
+        hault=temp*constant
+        far=hault+32
+        print(far)
+        return render(request,"temprature.html",{"result":far})
+    
+class ExponentView(View):
+    def get(self,request,*args,**kwargs):
+        form=OperationForm()    #Creating object for class OperationView(form.Form)
+        return render(request,"exponent.html",{"form":form})
+    
+    def post(self,request,*args,**kwargs):
+        form=OperationForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            n1=form.cleaned_data.get("num1")
+            n2=form.cleaned_data.get("num2")
+            result=n1**n2
+        else:
+            print("Invalid Logic")
+        return render(request,"exponent.html",{"result":result,"num1":n1,"num2":n2})
 
+class LoginView(View):
+    def get(self,request,*args,**kwargs):
+        form=LoginForm()
+        return render(request,"login.html",{"form":form})
+    
+    def post(self,request,*args,**kwargs):
+        uname=request.POST.get("username")
+        email=request.POST.get("email")
+        pword=request.POST.get("password")
+        print(uname,email,pword)
+        return render(request,"login.html")
+    
+class RegistrationView(View):
+    def get(self,request,*args,**kwargs):
+        form=RegistrationForm()
+        return render(request,"registration.html",{"form":form})
+    
+    def post(self,request,*args,**kwargs):
+        form=RegistrationForm(request.POST)
+        if form.is_valid():
+            print(request.POST)
+            print(form.cleaned_data)
+        else:
+            print("Invalid form")
+        return render(request,"registration.html",{"result":form.cleaned_data})
+
+    
+
+    
     
