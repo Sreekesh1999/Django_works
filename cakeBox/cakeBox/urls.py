@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from myapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('cakebox/add/',views.CakeBoxCreateView.as_view(),name="cakebox-add"),
+    path('cakebox/all/',views.CakeBoxListView.as_view(),name="cakebox-list"),
+    path('cakebox/<int:pk>',views.CakeBoxDetailView.as_view(),name="cakebox-detail"),
+    path('cakebox/<int:pk>/remove',views.CakeBoxDeleteView.as_view(),name="cakebox-remove"),
 ]
