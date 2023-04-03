@@ -5,36 +5,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 
 <body>
     <div class="container">
-        <h2>Cake Details</h2>
-        <table class="table table-striped">
-            <tr>
-                <th>Name</th>
-                <th>Flavour</th>
-                <th>Price</th>
-                <th>Shape</th>
-                <th>Weight</th>
-                <th>Layer</th>
-                <th>Description</th>
-            </tr>
-            <tr>
-                <td>{{cake.name}}</td>
-                <td>{{cake.flavour}}</td>
-                <td>{{cake.price}}</td>
-                <td>{{cake.shape}}</td>
-                <td>{{cake.weight}}</td>
-                <td>{{cake.layer}}</td>
-                <td>{{cake.descriptions}}</td>
-            </tr>
-
-
-        </table>
+      {%for message in messages%}
+        <div class="alert alert-dark alert-dismissible fade show" role="alert">
+            <strong>{{message}}</strong> 
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          {%endfor%}
+        <h2 class="mt-3">Cake Details</h2>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4 mt-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{cake.name}}</h5>
+                      <p class="card-text">{{cake.descriptions}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Flavour : {{cake.flavour}}</li>
+                      <li class="list-group-item">Price : {{cake.price}}</li>
+                      <li class="list-group-item">Shape : {{cake.shape}}</li>
+                      <li class="list-group-item">Weight : {{cake.weight}}</li>
+                      <li class="list-group-item">Layer : {{cake.layer}}</li>
+                      
+                    </ul>
+                    <div class="card-body">
+                      <a href="#" class="card-link">Card link</a>
+                      <a href="#" class="card-link">Another link</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-4"></div>
+        </div>
+       
     </div>
 </body>
 

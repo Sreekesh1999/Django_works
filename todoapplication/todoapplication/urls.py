@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from tasks import views
+from crm import views as crm_views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +29,16 @@ urlpatterns = [
     path("todos/<int:pk>/remove/",views.TodoDeleteView.as_view(),name="todo-delete"),
     path("todos/<int:pk>/change/",views.TaskEditView.as_view(),name="todo-edit"),
     path("todos/completed/",views.TodoCompletedView.as_view(),name="todo-completed"),
-]
+
+
+    path("employees/add/",crm_views.EmployeeCreateView.as_view(),name="emp-add"),
+    path("employees/all/",crm_views.EmployeeListView.as_view(),name="emp-list"),
+    path("employees/<int:pk>",crm_views.EmployeeDetailsView.as_view(),name="emp-detail"),
+    path("employees/<int:pk>/remove",crm_views.EmployeeDeleteView.as_view(),name="emp-delete"),
+    path("employees/<int:pk>/change/",crm_views.EmployeeEditView.as_view(),name="emp-edit"),
+    path("register/",crm_views.SignUpView.as_view(),name="register"),
+    path("login/",crm_views.SignInView.as_view(),name="signin"),
+    path("logout/",crm_views.signout_view,name="signout")
+
+
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

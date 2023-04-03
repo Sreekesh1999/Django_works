@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from myapp import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,4 +26,7 @@ urlpatterns = [
     path('cakebox/all/',views.CakeBoxListView.as_view(),name="cakebox-list"),
     path('cakebox/<int:pk>',views.CakeBoxDetailView.as_view(),name="cakebox-detail"),
     path('cakebox/<int:pk>/remove',views.CakeBoxDeleteView.as_view(),name="cakebox-remove"),
-]
+    path('cakebox/<int:pk>/change',views.CakeBoxEditview.as_view(),name="cakebox-edit"),
+    path('register/',views.SignUpView.as_view(),name="register"),
+    path('login/',views.SignInView.as_view(),name="signin"),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

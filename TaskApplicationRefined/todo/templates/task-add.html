@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+
+{%block title_block%}
+<title>todo-add</title>
+{%endblock%}
+
+{%block body_block%}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4 border border-info shadow bg-body-tertiary mt-5">
+            <form action="" method="post" class="mt-3">
+                {%csrf_token%}
+                {{form.as_p}}
+                <input type="submit" value="Add" class="btn btn-outline-info form-control mb-3">
+            </form>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
+
+{%endblock%}

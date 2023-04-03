@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/brands.min.css" integrity="sha512-L+sMmtHht2t5phORf0xXFdTC0rSlML1XcraLTrABli/0MMMylsJi3XA23ReVQkZ7jLkOEIMicWGItyK4CAt2Xw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/fontawesome.min.css" integrity="sha512-cHxvm20nkjOUySu7jdwiUxgGy11vuVPE9YeK89geLMLMMEOcKFyS2i+8wo0FOwyQO/bL8Bvq1KMsqK4bbOsPnA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -13,13 +14,21 @@
     <title>Document</title>
 </head>
 <body> 
-    <div class="container">
+    <div class="container mt-3">
+        {%for message in messages%}
+        <div class="alert alert-dark alert-dismissible fade show" role="alert">
+            <strong>{{message}}</strong> 
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          {%endfor%}
         <div class="d-grid gap-2 d-md-flex justify-content-md-end m-3">
+            Welcome {{request.user}} <i class="fa-sharp fa-solid fa-door-open mt-1"></i>
             <a href="{%url 'todo-completed'%}" class="btn btn-warning" type="button">My completed ToDos</a>
             <a href="{%url 'todo-add'%}" class="btn btn-warning" type="button">Add your ToDos here</a>
+            <a href="{%url 'signout'%}" class="btn btn-warning">Logout</a>
           </div>
         <h3 class="text-dark">List of ToDos &nbsp;<i class="fa-solid fa-square-check"></i></h3>
-        <table class="table table-striped">
+        <table class="table table-striped border shadow">
             <tr>
                 <th>ID</th>
                 <th>TaskName</th>
@@ -36,13 +45,16 @@
                 <td>{{t.status}}</td>
                 <td>{{t.date}}</td>
                 <td>
-                    <a href="{%url 'todo-delete' t.id%}" class="btn btn-outline-danger">Delete</a>
-                    <a href="{%url 'todo-detail' t.id%}" class="btn btn-outline-success">Detail</a>
-                    <a href="{%url 'todo-edit' t.id%}" class="btn btn-outline-dark">Mark as complete</a>
+                    <a href="{%url 'todo-delete' t.id%}" class="btn btn-outline-danger">Delete <i class="fa-solid fa-trash" style="color: #fd0808;"></i></a>
+                    <a href="{%url 'todo-detail' t.id%}" class="btn btn-outline-success">Details <i class="fa-solid fa-circle-info" style="color: #0bf40f;"></i></a>
+                    <a href="{%url 'todo-edit' t.id%}" class="btn btn-outline-dark">Mark as complete <i class="fa-solid fa-list" style="color: #01060e;"></i></a>
                 </td>
             </tr>
             {%endfor%}
         </table>
+        <div class="alert alert-primary" role="alert">
+            Hows the todos..Huh???  <i class="fa-solid fa-face-laugh-squint fa-shake fa-2xl" style="color: #12e64e;"></i>
+          </div>
     </div>
 </body>
 </html>
